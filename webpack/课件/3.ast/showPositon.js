@@ -6,6 +6,7 @@ const path = require('path');
 const visitor = {
     CallExpression(nodePath, state) {
         const { node } = nodePath;
+        // 节点是否是 MemberExpression 类型
         if (types.isMemberExpression(node.callee)) {
             if (node.callee.object.name === 'console') {
                 if (['log', 'info', 'warn', 'error', 'debug'].includes(node.callee.property.name)) {

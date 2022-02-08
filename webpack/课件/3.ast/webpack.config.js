@@ -16,6 +16,7 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         plugins: [
+                            // 换成自己的插件
                             [path.resolve(__dirname, 'import.js'), {
                                 //指定要按需加载的模块
                                 "libraryName": "lodash",

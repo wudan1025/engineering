@@ -5,10 +5,12 @@ let types = require("@babel/types");
 //let arrowFunctionPlugin = require('babel-plugin-transform-es2015-arrow-functions');
 let arrowFunctionPlugin = {
     visitor: {
+        // 遍历到对应type会执行对应回调函数
         //如果是箭头函数，那么就会进来此函数，参数是箭头函数的节点路径对象
         ArrowFunctionExpression(path) {
             let node = path.node;
             hostFunctionEnvironment(path);
+            // 改变函数类型，将箭头函数改为普通函数
             node.type = 'FunctionExpression';
         }
     }

@@ -2,7 +2,14 @@
 
 babel-core包括三部分
 1.把源代码转成AST语法
-2.遍历AST语法树，遍历的时候 会把语法树给插件进行处理。插件可以关注自己感兴趣的类型，进行处理
+2.遍历AST语法树，遍历的时候 会把语法树给插件进行处理。插件可以关注自己感兴趣的类型，进行处理(插件写在plugins中)
+例如
+```
+let targetSource = core.transform(sourceCode, {
+    plugins: [transformClassesPlugin]
+});
+```
+
 3.新的AST语法树重新生成源代码
 
 20:51

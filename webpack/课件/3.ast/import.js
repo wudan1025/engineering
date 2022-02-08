@@ -1,3 +1,4 @@
+// 自己写的 babel 插件
 //babel核心模块
 const core = require('@babel/core');
 //用来生成或者判断节点的AST语法树的节点
@@ -28,6 +29,7 @@ const visitor = {
 }
 
 
+// babel 固定写法
 module.exports = function () {
     return {
         visitor
