@@ -13,18 +13,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "age": () => (/* binding */ age)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("title_name");
-const age = "title_age";
-
-// setTimeout(() => {
-//   a.type = 'com1+com1';
-//   console.log(a);
-// }, 2000);
-
-// setTimeout(() => {
-//   a = '234';
-//   console.log(a);
-// }, 2000);
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ('title_name');
+const age = 'title_age';
 
 
 /***/ })
@@ -91,14 +85,14 @@ var __webpack_exports__ = {};
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
 // commonJS 引入
-let title = __webpack_require__(/*! ./title */ "./src/title.js");
+let title = __webpack_require__(/*! ./title.js */ "./src/title.js");
 console.log(title);
 console.log(title.age);
-
-// setTimeout(() => {
-//   console.log(type);
-// }, 5000);
 
 })();
 

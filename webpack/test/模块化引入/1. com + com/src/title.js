@@ -5,6 +5,9 @@
 // commonJS 导出
 // module.exports = 'com + com 同步';
 
-exports.name = 'test'
+exports.name = 'test';
+exports.type = 'com + com 同步';
 
-exports.type = 'com + com 同步'
+setTimeout(() => {
+  exports.name = 'test123';
+}, 2000);

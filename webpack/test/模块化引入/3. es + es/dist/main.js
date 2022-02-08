@@ -1,4 +1,5 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/title.js":
@@ -7,19 +8,17 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "age": () => (/* binding */ age)
 /* harmony export */ });
 /*
  * @LastEditors: wudan01
  * @description: 文件描述
  */
-// es module 导出
-var title = 'title';
-console.log('commonJS+ES MODULE');
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (title);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ('title_name');
+const age = 'title_age';
 
 
 /***/ })
@@ -86,22 +85,11 @@ var __webpack_exports__ = {};
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*
- * @LastEditors: wudan01
- * @description: 文件描述
- */
-// const load = document.getElementById('load');
-// load.addEventListener('click', () => {
-//   import(/* webpackChunkName: 'title' */ './title').then((result) => {
-//     console.log(result.default);
-//   });
-// });
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _title__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./title */ "./src/title.js");
 
-// import './src/tilte.js';
-
-// commonJS 引入
-__webpack_require__(/*! ./title.js */ "./src/title.js");
-
+console.log(_title__WEBPACK_IMPORTED_MODULE_0__["default"]);
+console.log(_title__WEBPACK_IMPORTED_MODULE_0__.age);
 })();
 
 /******/ })()
