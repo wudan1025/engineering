@@ -6,8 +6,10 @@
 let common = require('./common.js');
 let title = require('./title.js');
 
+// console.log(title);
 console.log(title.age);
 
+// console.log(common);
 console.log(common.age);
 console.log(common.obj);
 

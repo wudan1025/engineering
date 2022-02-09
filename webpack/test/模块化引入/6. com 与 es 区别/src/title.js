@@ -9,6 +9,8 @@ export { age };
 // es module 导出
 // export var age = 'es';
 
+// export default 'title';
+
 setTimeout(() => {
   age = 'new es';
 }, 1000);

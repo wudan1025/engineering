@@ -46,7 +46,7 @@ require.r = (exports) => {
   Object.defineProperty(exports, '__esModule', { value: true });
 }
 debugger
-let title = require("./src/common.js");
+let title = require("./src/common.js.js");
 //console.log(title.default);
 setTimeout(() => {
   console.log(title.age);

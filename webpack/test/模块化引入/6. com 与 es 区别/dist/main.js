@@ -1,11 +1,12 @@
 (() => {
-  var __webpack_modules__ = {
-    './src/common.js': (__unused_webpack_module, exports) => {
+  var _modules = {
+    './src/common.js': (_module, exports) => {
       var age = 'common';
       exports.age = age;
       setTimeout(() => {
         age = 'new common';
       }, 1000);
+      // obj 导出为地址，修改内容会同步
       var obj = {
         val: 'obj',
       };
@@ -14,14 +15,11 @@
         obj.val = 'new obj';
       }, 1000);
     },
-    './src/title.js': (
-      __unused_webpack_module,
-      __webpack_exports__,
-      __webpack_require__
-    ) => {
+    './src/title.js': (_module, _exports, _require) => {
       'use strict';
-      __webpack_require__.r(__webpack_exports__);
-      __webpack_require__.d(__webpack_exports__, {
+      _require.r(_exports);
+      _require.d(_exports, {
+        // 每次获取都是获取当前作用域下的最新值
         age: () => age,
       });
       var age = 'es';
@@ -30,25 +28,22 @@
       }, 1000);
     },
   };
-  var __webpack_module_cache__ = {};
-  function __webpack_require__(moduleId) {
-    var cachedModule = __webpack_module_cache__[moduleId];
+  var _cache = {};
+  function _require(moduleId) {
+    var cachedModule = _cache[moduleId];
     if (cachedModule !== undefined) {
       return cachedModule.exports;
     }
-    var module = (__webpack_module_cache__[moduleId] = {
+    var module = (_cache[moduleId] = {
       exports: {},
     });
-    __webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+    _modules[moduleId](module, module.exports, _require);
     return module.exports;
   }
   (() => {
-    __webpack_require__.d = (exports, definition) => {
+    _require.d = (exports, definition) => {
       for (var key in definition) {
-        if (
-          __webpack_require__.o(definition, key) &&
-          !__webpack_require__.o(exports, key)
-        ) {
+        if (_require.o(definition, key) && !_require.o(exports, key)) {
           Object.defineProperty(exports, key, {
             enumerable: true,
             get: definition[key],
@@ -58,21 +53,20 @@
     };
   })();
   (() => {
-    __webpack_require__.o = (obj, prop) =>
-      Object.prototype.hasOwnProperty.call(obj, prop);
+    _require.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
   })();
   (() => {
-    __webpack_require__.r = (exports) => {
+    _require.r = (exports) => {
       if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
         Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
       }
       Object.defineProperty(exports, '__esModule', { value: true });
     };
   })();
-  var __webpack_exports__ = {};
+  var _exports = {};
   (() => {
-    let common = __webpack_require__('./src/common.js');
-    let title = __webpack_require__('./src/title.js');
+    let common = _require('./src/common.js');
+    let title = _require('./src/title.js');
     console.log(title.age);
     console.log(common.age);
     console.log(common.obj);
