@@ -11,6 +11,7 @@
         this.taps.forEach((tap) => tap(...args));
     }
 } */
+// 接受2个参数
 let syncHook = new SyncHook(['name', 'age']);
 syncHook.tap('监听器的名字1', (name, age) => {
     console.log(name, age);
