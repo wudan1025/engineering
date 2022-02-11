@@ -7,4 +7,5 @@ compiler.run((err, stats) => {
     console.log(stats.toJson());
 });
 
+// node debugger.js 执行 查看 dist 目录 打包出来文件
 

@@ -9,6 +9,7 @@ const baseDir = toUnixPath(process.cwd());
 function toUnixPath(filePath) {
   return filePath.replace(/\\/g, '/');
 }
+
 class Compilation {
   constructor(options) {
     this.options = options;
@@ -37,6 +38,7 @@ class Compilation {
       this.fileDependencies.push(entryPath);
       //6.从入口文件出发,调用所有配置的Loader对模块进行编译
       let entryModule = this.buildModule(entryName, entryPath);
+      console.log(entryModule)
       //8.根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk
       let chunk = {
         name: entryName, //代码块名称是入口名称
@@ -85,11 +87,13 @@ class Compilation {
         loaders.push(...rule.use);
       }
     });
+    // 从右向左
     sourceCode = loaders.reduceRight((sourceCode, loader) => {
       return require(loader)(sourceCode);
     }, sourceCode);
-    //7.再找出该模块依赖的模块，再递归本步骤(buildModule)直到所有入口依赖的文件都经过了本步骤的处理
-    //"./src/title.js" 每个模块都有一个ID，   id: './src/entry1.js',
+    //7.再找出该模块依赖的模块(通过ast语法树)，再递归本步骤(buildModule)直到所有入口依赖的文件都经过了本步骤的处理
+    //"./src/title.js" 每个模块都有一个ID，   
+    // id: './src/entry1.js',
     //模块ID就是相对于项目根目录的相对路径
     let moduleId = './' + path.relative(baseDir, modulePath);
     //创建一个模块对象，moduleId是相对于项目根目录的相对路径 dependencies表示此模块依赖的模块
@@ -98,6 +102,8 @@ class Compilation {
     let ast = parser.parse(sourceCode, { sourceType: 'module' });
     traverse(ast, {
       CallExpression: ({ node }) => {
+        // 如果节点名是 require 说明是引用其他文件
+        // 从而可以获取到当前文件引用的其他文件
         if (node.callee.name === 'require') {
           let depModuleName = node.arguments[0].value; //./title
           //获取当前模块所有的目录 C:\aproject\zhufengwebpack202111\4.flow\src
@@ -119,12 +125,14 @@ class Compilation {
         }
       },
     });
+    // 将 ast 重新生成 源代码
     let { code } = generator(ast);
     module._source = code;
     module.dependencies.forEach(({ depModuleId, depModulePath }) => {
       let buildedModule = this.modules.find(
         (module) => module.id === depModuleId
       );
+      // 编译过的不再编译
       if (buildedModule) {
         //title这个module.names = [entry1,entry2];
         buildedModule.names.push(name);
@@ -158,12 +166,12 @@ function getSource(chunk) {
    (() => {
     var modules = {
       ${chunk.modules.map(
-        (module) => `
+    (module) => `
         "${module.id}": (module) => {
           ${module._source}
         },
       `
-      )}  
+  )}  
     };
     var cache = {};
     function require(moduleId) {
