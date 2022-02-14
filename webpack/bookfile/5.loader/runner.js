@@ -11,6 +11,7 @@ let rules = [
     },
     {
         test: /title\.js$/,
+        // enforce 配置 post 为post loader
         enforce: 'post',
         use: ['post1-loader.js', 'post2-loader.js']
     },
