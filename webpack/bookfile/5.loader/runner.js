@@ -5,6 +5,7 @@ const fs = require('fs');
 const entryFile = path.resolve(__dirname, 'src', 'title.js');
 //loader的转换规则配置
 let rules = [
+    // 如何找到loader? 实际运行 runner 下的loader
     {
         test: /title\.js$/,
         use: ['normal1-loader.js', 'normal2-loader.js']
@@ -27,6 +28,7 @@ let parts = request.replace(/^-?!+/, '').split('!');//['inline1-loader','inline2
 let resource = parts.pop();//entryFile
 const inlineLoaders = parts;//['inline1-loader','inline2-loader']
 const preLoaders = [], postLoaders = [], normalLoaders = [];
+// 先拿到所有类型的loader
 rules.forEach(rule => {
     //if (rule.test.test(resource)) {
     if (resource.match(rule.test)) {
@@ -45,6 +47,7 @@ rules.forEach(rule => {
  * !! noPrePostAutoLoaders 不要前置、后置、普通loader,只要内联
  */
 let loaders = [];
+// startsWith
 if (request.startsWith('!!')) {
     loaders = inlineLoaders;
 } else if (request.startsWith('-!')) {
@@ -60,7 +63,7 @@ loaders = loaders.map(resolveLoader);
 runLoaders({
     resource,//要加载和转换的模块
     loaders,//是一个绝对路径的loader数组
-    context: { name: 'zhufeng' },//loader的上下文对象
+    context: { name: 'zhufeng' },//loader的上下文对象，this 指针
     readResource: fs.readFile.bind(fs)//读取硬盘上资源的方法
 }, (err, result) => {
     console.log(err);//运行错误

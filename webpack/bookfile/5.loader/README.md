@@ -19,6 +19,7 @@ pre=>normal=>inline=>post
 4. 加载的模块前面的特殊符号如何工作的？! !! -!
 5. 什么是normal?什么是pitch?它们如果都写了会如何配合工作？
 
+pitch 返回值不为null ,会回头执行上一个loader的nomal
 
 10:50
 水星

@@ -4,6 +4,12 @@ const fs = require('fs');
  * @param {*} loader loader文件的绝对路径
  */
 function createLoaderObject(loader) {
+    // normal 是这个函数？
+    // function loader(source) {
+    //     let options = this.getOptions({});//loader-context
+    //     let { code } = babel.transform(source, options);
+    //     return code;//转换成ES5的内容
+    // }
     let normal = require(loader);
     let pitch = normal.pitch;
     //loader是否需要原生的Buffer类型的数据
@@ -19,11 +25,15 @@ function createLoaderObject(loader) {
     }
 
 }
+
 function runLoaders(options, finalCallback) {
-    // 解构参数获取 resource=要加载的模块 loaders=loader数组 loader执行时的this对象  readResource读取文件的方法
-    let { resource, loaders = [], context = {}, readResource = fs.readFile } = options;
+    // 解构参数获取 resource=要加载的模块 loaders=loader数组 
+    // loader执行时的this对象  readResource读取文件的方法
+    let { resource, loaders = [], context = {},
+        readResource = fs.readFile } = options;
     //把一个loader的路径数组转成loader对象数组
     let loaderObjects = loaders.map(createLoaderObject);
+    // 创建 this 指针
     let loaderContext = context;
     loaderContext.resource = resource;//加载的模块
     loaderContext.readResource = readResource;//读取文件的方法
@@ -136,6 +146,7 @@ function runLoaders(options, finalCallback) {
      * @param {*} pitchingCallback pitching 回调
      */
     function processResource(processOptions, loaderContext, pitchingCallback) {
+        // 读取源文件的内容
         processOptions.readResource(loaderContext.resource, (err, resourceBuffer) => {
             processOptions.resourceBuffer = resourceBuffer;//把读到的文件的buffer对象传递给processOptions.resourceBuffer 
             loaderContext.loaderIndex--;//让 loaderContext.loaderIndex=7
