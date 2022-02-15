@@ -2,7 +2,7 @@
  * @LastEditors: wudan01
  * @description: 文件描述
  */
-const { runLoaders } = require('loader-runner');
+const { runLoaders } = require('./loader-runner');
 const path = require('path');
 const fs = require('fs');
 //入口文件
@@ -10,6 +10,7 @@ const entryFile = path.resolve(__dirname, 'src', 'title.js');
 //loader的转换规则配置
 let rules = [
   // 如何找到loader? 实际运行 runner 下的loader
+  // 答案：resolveLoader 函数解析路径
   {
     test: /title\.js$/,
     use: ['normal1-loader.js', 'normal2-loader.js'],
@@ -70,12 +71,12 @@ runLoaders(
   {
     resource, //要加载和转换的模块
     loaders, //是一个绝对路径的loader数组
-    context: { name: 'test' }, //loader的上下文对象，this 指针
+    context: { name: 'zhufeng' }, //loader的上下文对象，this 指针
     readResource: fs.readFile.bind(fs), //读取硬盘上资源的方法
   },
   (err, result) => {
-    console.log(err); //运行错误
-    // console.log(result);//转换后的结果
+    // console.log(err); //运行错误
+    // console.log(result); //转换后的结果
     //resourceBuffer 是buffer格式的源代码的内容，如果是pitch返回的，没有读取源文件，那么它就是null
     if (result.resourceBuffer) {
       //   console.log(result.resourceBuffer.toString('utf8')); //最初始的转换前的源文件内容
