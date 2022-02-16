@@ -26,6 +26,7 @@ function createLoaderObject(loader) {
   };
 }
 
+// 入口
 function runLoaders(options, finalCallback) {
   // 解构参数获取 resource=要加载的模块 loaders=loader数组
   // loader执行时的this对象  readResource读取文件的方法
