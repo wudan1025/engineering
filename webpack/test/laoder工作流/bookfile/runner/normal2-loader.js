@@ -3,10 +3,10 @@
  * @description: 文件描述
  */
 function loader(source) {
-  console.log('normal2');
+  // console.log('normal2');
   return source + '//normal2';
 }
 loader.pitch = function () {
-  console.log('normal2 pitch');
+  // console.log('normal2 pitch');
 };
 module.exports = loader;

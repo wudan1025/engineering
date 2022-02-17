@@ -2,7 +2,7 @@
  * @LastEditors: wudan01
  * @description: 文件描述
  */
-const { runLoaders } = require('./loader-runner');
+const { runLoaders } = require('loader-runner');
 const path = require('path');
 const fs = require('fs');
 //入口文件

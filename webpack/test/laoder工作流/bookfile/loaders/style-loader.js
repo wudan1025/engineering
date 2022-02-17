@@ -30,16 +30,23 @@ loader.pitch = function (remainingRequest) {
   // console.log(remainingRequest);
   //把绝对路径变成可以在本模块内加载的相对路径
   //"!!../loaders/less-loader.js!./index.less"
+  // todo 地址没有 !!
+  // 手动添加 会报 require(${!!request}) 会报警告
   let request = JSON.stringify(
     this.utils.contextify(this.context, remainingRequest)
   );
-  //   console.log(request);
+  console.log(request);
   // require("!!../loaders/less-loader.js!./index.less");
   let moduleScript = `
          let style = document.createElement('style');
-         style.innerHTML =  require(${request});
+         style.innerHTML =  require(!!${request});
          document.head.appendChild(style);
      `;
+  // let moduleScript = `
+  //        let style = document.createElement('style');
+  //        style.innerHTML =  require("!!../loaders/less-loader.js!./index.less");
+  //        document.head.appendChild(style);
+  //    `;
   return moduleScript;
 };
 
