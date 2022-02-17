@@ -18,13 +18,13 @@ module.exports = {
   //在webpack解析loader的时候配置如何查找
   resolveLoader: {
     //配置别名
-    // alias: {
-    //   'inline1-loader': path.resolve(__dirname, 'loaders', 'inline1-loader.js'),
-    //   'inline2-loader': path.resolve(__dirname, 'loaders', 'inline2-loader.js'),
-    //   'babel-loader': path.resolve(__dirname, 'loaders', 'babel-loader'),
-    // },
-    // //配置去哪些目录里找loader
-    // modules: ['node_modules', path.resolve(__dirname, 'loaders')],
+    alias: {
+      'inline1-loader': path.resolve(__dirname, 'loaders', 'inline1-loader.js'),
+      'inline2-loader': path.resolve(__dirname, 'loaders', 'inline2-loader.js'),
+      'babel-loader': path.resolve(__dirname, 'loaders', 'babel-loader'),
+    },
+    //配置去哪些目录里找loader
+    modules: ['node_modules', path.resolve(__dirname, 'loaders')],
   },
   module: {
     rules: [
